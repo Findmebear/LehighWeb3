@@ -1,6 +1,6 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.4;
 
-contract Greeter {
+contract DTube {
   uint public postCount = 0;
   string public name = "DTube";
   mapping(uint => Post) public posts;
@@ -21,7 +21,7 @@ contract Greeter {
     address author
   );
 
-  constructor() public {
+  constructor() public{
   }
 
   function createPost(string memory _videoHash, string memory _title, string memory _text) public {
@@ -40,7 +40,6 @@ contract Greeter {
     // Add video to the contract
     posts[postCount] = Post(postCount, _text, _videoHash, _title, msg.sender);
     // Trigger an event
-    emit PostCreated(id, _text, hash, title, author); 
-    (videoCount, _videoHash, _title, msg.sender);
+    emit PostCreated(postCount, _text, _videoHash, _title, msg.sender); 
   }
 }
