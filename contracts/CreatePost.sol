@@ -22,6 +22,7 @@ contract CreatePost {
   );
 
   constructor() public{
+    
   }
 
   function createPost(string memory _videoHash, string memory _title, string memory _text) public {
