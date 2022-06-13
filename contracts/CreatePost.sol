@@ -1,8 +1,13 @@
+// SPDX-License-Identifier: UNLICENSED
+
 pragma solidity ^0.8.4;
 
+import "hardhat/console.sol";   //perform console logs provided by hardhat
+
 contract CreatePost {
-  uint public postCount = 0;
+  uint public postCount = 0;    //only positive values
   string public name = "CreatePost";
+  //Mapping is a reference type as arrays and structs
   mapping(uint => Post) public posts;
 
   struct Post {
@@ -21,11 +26,11 @@ contract CreatePost {
     address author
   );
 
-  constructor() public{
+  constructor(){
     
   }
 
-  function createPost(string memory _videoHash, string memory _title, string memory _text) public {
+  function createPost(string memory _videoHash, string memory _text, string memory _title) public {
     // Make sure the text exists and smaller than 500 
     require(bytes(_text).length > 0 && bytes(_text).length < 501);
     // Make sure the video hash exists
