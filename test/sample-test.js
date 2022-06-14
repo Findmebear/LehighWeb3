@@ -1,19 +1,28 @@
 const { expect } = require("chai");
+const { Contract } = require("ethers");
 const { ethers } = require("hardhat");
 
-describe("CreatePost", function () {
-  it("Should return the new Post", async function () {
-    const CreatePost = await ethers.getContractFactory("CreatePost");
-    const createPost = await CreatePost.deploy("Hello, world!", "Hello, world!", "Hello, world!");
-    await createPost.deployed();
+contract('PTube', ([deployer, author]) => {
+  let PTube
 
-    expect(await createPost.greet()).to.equal("Hello, world!");
+  before(async () => {
+    PTube = await PTube.deployed()
+  })
 
-    const setGreetingTx = await createPost.setGreeting("Hola, mundo!");
+describe()
+// describe("CreatePost", function () {
+//   it("Should return the new Post", async function () {
+//     const CreatePost = await ethers.getContractFactory("CreatePost");
+//     const createPost = await CreatePost.deploy("Hello, world!", "Hello, world!", "Hello, world!");
+//     await createPost.deployed();
 
-    // wait until the transaction is mined
-    await setGreetingTx.wait();
+//     expect(await createPost.greet()).to.equal("Hello, world!");
 
-    expect(await createPost.greet()).to.equal("Hola, mundo!");
-  });
-});
+//     const setGreetingTx = await createPost.setGreeting("Hola, mundo!");
+
+//     // wait until the transaction is mined
+//     await setGreetingTx.wait();
+
+//     expect(await createPost.greet()).to.equal("Hola, mundo!");
+//   });
+// });
