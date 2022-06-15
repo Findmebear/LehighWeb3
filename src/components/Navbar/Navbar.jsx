@@ -15,7 +15,7 @@ const Navbar = () => {
     * First make sure we have access to window.ethereum
     */
       const { ethereum } = window;
-
+      setCurrentAccount("Sign In");
       if (!ethereum) {
         console.log("Make sure you have metamask!");
       } else {
@@ -62,18 +62,17 @@ const connectWallet = async () => {
 
 
   return (
+  <div class="leftnav">
+    <button > WEB3 App </button>
+    <button >Profile</button>
+   
+    <div class = "rightnav">
+      <button onClick={connectWallet}> {currentAccount}</button>
+    </div>
+    
 
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-    <button > WEB3 App
-    </button>
+  </div>
 
-    <form class="form-inline">
-      <button >Profile</button>
-      <button onClick={connectWallet}> Sign in</button>
-    </form>
-
-
-    </nav>
 
 
   );
