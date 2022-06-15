@@ -1,15 +1,13 @@
 # Basic Sample Hardhat Project
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+In order to deploy your smart contracts to the Rinkeby Testnet: 
+1) Create .env file in the main folder
+2) Put your private key from the metamask extension into the .env file with the format :
 
-Try running some of the following tasks:
+PRIVATE_KEY=YOUR_KEY
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+3) Run the terminal command :
+ npx hardhat run scripts/deploy.js --network rinkeby
+
+
+
