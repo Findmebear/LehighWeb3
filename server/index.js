@@ -5,14 +5,16 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
 const { Pool } = require('pg') //postgreSQL Pool library
+require('dotenv').config()
 const pool = new Pool({
     user: 'wbejlafffgmfxp',
     host: 'ec2-3-228-235-79.compute-1.amazonaws.com',
     database: 'daega0ttst88l3',
-    password: '7adf5b3e6f5a01622043311f2cdd5caab39758dd0489aff2ecfab5bca8c824ce',
+    password: process.env.DB_PASSWORD,
     port: 5432,
     ssl: { rejectUnauthorized: false }
 })
+
 const port = process.env.PORT || 3000;
 
 const app = express();
