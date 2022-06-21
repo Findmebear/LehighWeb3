@@ -1,12 +1,8 @@
 node_modules
 artifacts
 cache
-<<<<<<< HEAD
 
 #Environment 
 .env
-=======
-.env
->>>>>>> 7a1915dab856fb70e6df879e654af350b8531f9e
 
 .DS_Store
