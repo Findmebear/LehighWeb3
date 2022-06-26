@@ -11,12 +11,12 @@ const Navbar = () => {
   */
 
   const {currentAccount, connectWallet} = useContext(TransactionContext);
-
-
 return (
   <div class="leftnav">
     <button > WEB3 App </button>
-    <button >Profile</button>
+    <button > Profile </button>
+    <button > Post </button>
+    
    
     <div class = "rightnav">
       <button onClick={connectWallet}> {currentAccount}</button>
