@@ -31,7 +31,7 @@ export const TransactionsProvider = ({ children }) => {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         //const balanceInEth = ethers.utils.formatEther(contractAddress);
         const balance = await provider.getBalance(address);
-        const balanceInEth = ethers.utils.formatEther(balance, {pad: true});
+        const balanceInEth = ethers.utils.formatEther(balance, { pad: true });
         console.log("The balance is", balanceInEth);
     }
 

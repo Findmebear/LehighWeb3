@@ -1,0 +1,8 @@
+node_modules
+artifacts
+cache
+
+#Environment 
+.env
+
+.DS_Store
