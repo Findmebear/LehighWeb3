@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <div class="leftnav">
-      <button > WEB3 App </button>
+      <button onClick={() => navigate("/")}>WEB3 APP</button>
       <button> Profile </button>
       <button onClick={() => navigate("/post")}>Post</button>
       <div class="rightnav">
