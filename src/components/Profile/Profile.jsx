@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
-import * as ReactDOM from "react-dom";
-import { TransactionContext } from "../../context/TransactionContext";
+import "./profile.css";
 
 const Profile = () => {
     return (
-     
+        <div class="card">
+            <div class="title">
+                <h1> Profile Card </h1>
+                <h2>John Doe</h2>
+                <p class="title">Computer Science and Business</p>
+                <p >Lehigh University</p>
+                <a>
+                    <p>LinkedIn</p>
+                    <p>Instagram</p>
+                </a>
+                <p>Contact Information</p>
+            </div>
+        </div>
+
     );
 
 };
