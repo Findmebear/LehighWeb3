@@ -8,21 +8,19 @@ export const TransactionContext = React.createContext();
 
 const { ethereum } = window;
 
-// const getEthereumContract = () => {
-//     const provider = new ethers.providers.Web3Provider(ethereum);
-//     const signer = provider.getSigner();
-//     const transactionContract = new ethers.Contract(contractAddress, contractABI, signer);
+const getEthereumContract = () => {
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    const createPostContract = new ethers.Contract(contractAddress, contractABI, signer);
 
-//     console.log((
-//         provider,
-//         signer,
-//         transactionContract
-//     ))
-// }
+    return createPostContract;
+}
 
 export const TransactionsProvider = ({ children }) => {
 
     const [currentAccount, setCurrentAccount] = useState("");
+    const [postCount, setPostCount] = useState(localStorage.getItem("createPostCount"));
+    const [formData] = useState({videoHash: "", text: "", title: ""})
     // const [currentBalance, balanceInEth] = useState("");
 
     const getBalance = async (address) => {
@@ -80,31 +78,38 @@ export const TransactionsProvider = ({ children }) => {
         }
     }
 
-    // const createPost = async(video, title, text) => {
-    //     try{
-    //         const {ethereum} = window;
+    const createPost = async() => {
+        try{
+            const {ethereum} = window;
 
-    //         if(ethereum){    
-    //             const provider = new ethers.providers.Web3Provider(ethereum);
-    //             const signer = provider.getSigner();
-    //             const createPostContract = new ethers.Contract(contractAddress,contractABI,signer);
+            if(ethereum){    
+                const createPostContract = getEthereumContract();
 
-    //             createPostContract.createPost(video, title, text);
+                const createPostHash = await createPostContract.createPost("Hash Test", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos tenetur recusandae culpa, impedit, commodi natus facere molestias harum facilis...", "Title Test");
 
-    //             console.log("created new post");
-    //         }
-    //     } catch (error){
-    //         console.log(error);
-    //     }
+                console.log("Loading - ${createPostHash.hash}");
+                await createPostHash.wait();
+                console.log("Success - ${createPostHash.hash}");
+        
+                const postCount = await createPostContract.getPostCount();
+        
+                setPostCount(postCount.toNumber());
+                window.location.reload();
+            } else {
+                console.log("No ethereum object");
+            }
+        } catch (error){
+            console.log(error);
+        }
 
-    // }
+    }
 
     useEffect(() => {
         checkIfWalletIsConnected();
     }, [])
 
     return (
-        <TransactionContext.Provider value={{ connectWallet, currentAccount }} >
+        <TransactionContext.Provider value={{ connectWallet, currentAccount, createPost, postCount}} >
             {children}
         </TransactionContext.Provider>
     );
