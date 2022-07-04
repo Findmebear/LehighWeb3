@@ -1,10 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import "./profile.css";
 
 export default class Profile extends React.Component {
+
     //code that gets the name of users based on their id
     state = {
-        persons: []
+        persons: [],
+        user_id: "0x10a387cd1641775244cbc2ae2b48710dc80e4fab"
     }
 
     componentDidMount() {
@@ -18,12 +21,15 @@ export default class Profile extends React.Component {
     render() {
         return (
             <ul>
-                {
-                    this.state.persons
-                        .map(person =>
-                            <li key={person.user_id}>{person.first_name} {person.last_name}</li>
-                        )
-                }
+                <div class="card" >
+                    <p class="title">{
+                        this.state.persons
+                            .map(person =>
+                                <li key={person.user_id}>{person.first_name} {person.last_name}</li>
+                            )
+                    } </p>
+
+                </div>
             </ul>
         )
     }
