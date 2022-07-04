@@ -8,7 +8,7 @@ export default class Profile extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`https://jsonplaceholder.typicode.com/users`)
+        axios.get(`http://localhost:3000/users/`)
             .then(res => {
                 const persons = res.data;
                 this.setState({ persons });
@@ -21,7 +21,7 @@ export default class Profile extends React.Component {
                 {
                     this.state.persons
                         .map(person =>
-                            <li key={person.id}>{person.name}</li>
+                            <li key={person.user_id}>{person.first_name} {person.last_name}</li>
                         )
                 }
             </ul>
@@ -33,6 +33,7 @@ export default class Profile extends React.Component {
 //https://stackoverflow.com/questions/64312119/send-axios-api-requests-from-react-app-deployed-on-heroku
 //https://elements.heroku.com/buildpacks/axios/axios
 //https://www.youtube.com/watch?v=oQnojIyTXb8
+//https://www.digitalocean.com/community/tutorials/react-axios-react
 
 {/* <ul>
 {this.state.userid.map(person => (
