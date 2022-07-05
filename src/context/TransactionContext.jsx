@@ -18,10 +18,20 @@ const getEthereumContract = () => {
 
 export const TransactionsProvider = ({ children }) => {
 
+    
+
     const [currentAccount, setCurrentAccount] = useState("");
     const [postCount, setPostCount] = useState(localStorage.getItem("createPostCount"));
-    const [formData] = useState({videoHash: "", text: "", title: ""})
+    const [formData, setformData] = useState({videoHash: "", text: "", title: ""})
     // const [currentBalance, balanceInEth] = useState("");
+
+
+    const handleChange = (e, name) => {
+        console.log('running', e.target.value);
+        setformData((prevState) => ({ ...prevState, [name]: e.target.value }));
+      };
+
+
 
     const getBalance = async (address) => {
         // const network = 'rinkeby'; // use rinkeby testnet
@@ -109,7 +119,7 @@ export const TransactionsProvider = ({ children }) => {
     }, [])
 
     return (
-        <TransactionContext.Provider value={{ connectWallet, currentAccount, createPost, postCount}} >
+        <TransactionContext.Provider value={{ connectWallet, currentAccount, createPost, postCount, handleChange, formData }} >
             {children}
         </TransactionContext.Provider>
     );
