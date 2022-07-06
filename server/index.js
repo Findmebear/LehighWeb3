@@ -23,7 +23,7 @@ const pool = new Pool(
     process.env.NODE_ENV === "production" ? proConfig : devConfig
 );
 
-const fileUpload = require('express-fileupload');
+// const fileUpload = require('express-fileupload');
 const port = process.env.PORT || 3000;
 const app = express();
 
@@ -31,7 +31,7 @@ const app = express();
 app.use(bodyParser.json({limit: "30mb", extend: true}))
 app.use(bodyParser.urlencoded({limit: "30mb", extend: true}))
 app.use(cors());
-app.use(fileUpload());
+// app.use(fileUpload());
 
 //ROUTES//
 
@@ -50,7 +50,7 @@ app.get('/users', async (request, response) =>{
 })
 
 //get an user
-app.get('/users/:id', async (request, response) =>{
+app.get('/user/id', async (request, response) =>{
     try {
         // const { user_id } = request.params;
         const { user_id } = request.body;
@@ -65,7 +65,7 @@ app.get('/users/:id', async (request, response) =>{
 })
 
 //create a user
-app.post('/users', async (request, response) =>{
+app.post('/user', async (request, response) =>{
     try {
         const { user_id, first_name, last_name, description} = request.body;
         const newUser = await pool.query(
@@ -78,8 +78,37 @@ app.post('/users', async (request, response) =>{
     }
 })
 
+// //upload an image
+// app.post('/post', async (request, response) =>{
+//     const {name, data} = request.files.pic;
+//     if (name && data) {
+//         await pool.query(
+//             'INSERT INTO a_user_image (image_id, img, name) VALUES ($1, $2 , $3) RETURNING *',
+//             [image_id, data, name]
+//         );
+//         res.sendStatus(200);
+//     } else {
+//         res.sendStatus(400);
+//     }
+// })
+
+// //get an image
+// app.get('/img/:image_id', async (request, response) =>{
+//     try {
+//         const { image_id } = request.params;
+//         const user = await pool.query(
+//             'SELECT * FROM a_user_image WHERE image_id = $1', 
+//             [image_id]
+//         );
+//         response.json(user.rows[0]);
+//     } catch (err) {
+//         console.error(err.message);
+//     }
+// })
+
+
 //update all the user's information, including first_name, last_name, and description.
-app.put('/users/:id', async (request, response) =>{
+app.put('/user/id', async (request, response) =>{
     try {
         let body = [];
         request.on('data', (chunk) => {
@@ -117,7 +146,7 @@ app.put('/users/:id', async (request, response) =>{
 })
 
 //delete an user
-app.delete('/users/:id', async (request, response) =>{
+app.delete('/users/id', async (request, response) =>{
     try {
         const { user_id } = request.body;
         const deleteUser = await pool.query(
