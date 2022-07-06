@@ -1,5 +1,4 @@
 import express, { response } from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import { createRequire } from 'module';
 
@@ -21,8 +20,8 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 
-app.use(bodyParser.json({limit: "30mb", extend: true}))
-app.use(bodyParser.urlencoded({limit: "30mb", extend: true}))
+app.use(express.urlencoded({extended: true}));
+app.use(express.json()) // To parse the incoming requests with JSON payloads
 app.use(cors());
 // app.use(fileUpload());
 
