@@ -2,26 +2,19 @@ import express, { response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { createRequire } from 'module';
-import { request } from 'http';
+
 const require = createRequire(import.meta.url);
 
 const { Pool } = require('pg') //postgreSQL Pool library
 require('dotenv').config()
-const devConfig = {
+const pool = new Pool({
     user: 'wbejlafffgmfxp',
     host: 'ec2-3-228-235-79.compute-1.amazonaws.com',
     database: 'daega0ttst88l3',
     password: process.env.DB_PASSWORD,
     port: 5432,
     ssl: { rejectUnauthorized: false }
-};
-
-const proConfig = {
-    connectionString: process.env.DATABASE_URL //heroku addons
-};
-const pool = new Pool(
-    process.env.NODE_ENV === "production" ? proConfig : devConfig
-);
+});
 
 // const fileUpload = require('express-fileupload');
 const port = process.env.PORT || 3000;
