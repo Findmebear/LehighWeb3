@@ -10,9 +10,16 @@ export default class Profile extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:3000/user/id", {
-            params: {
-                id: "0x10a387cd1641775244cbc2ae2b48710dc80e4fab"
+        axios.get('http://localhost:3000/users')
+        .then(res => {
+            const persons = res.data;
+            this.setState({ persons })
+            console.log(persons);
+        })
+
+        axios.get("http://localhost:3000/user/:user_id", {
+            params:{
+                user_id: "0xb68653b037f453a34fdf4a932493708e34ed7f80"
             }
         })
             .then(function (response) {
@@ -25,7 +32,6 @@ export default class Profile extends React.Component {
                 // always executed
             })
     }
-
     render() {
         return (
             <ul>

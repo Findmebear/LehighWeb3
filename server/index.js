@@ -42,10 +42,9 @@ app.get('/users', async (request, response) =>{
 })
 
 //get an user
-app.get('/user/id', async (request, response) =>{
+app.get('/users/:user_id', async (request, response) =>{
     try {
-        // const { user_id } = request.params;
-        const { user_id } = request.body;
+        const { user_id } = request.params;
         const user = await pool.query(
             'SELECT * FROM a_user WHERE user_id = $1', 
             [user_id]
