@@ -7,14 +7,22 @@ export default class Profile extends React.Component {
     //code that gets the name of users based on their id
     state = {
         persons: [],
-        user_id: "0x10a387cd1641775244cbc2ae2b48710dc80e4fab"
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:3000/users/`)
-            .then(res => {
-                const persons = res.data;
-                this.setState({ persons });
+        axios.get("http://localhost:3000/user/id", {
+            params: {
+                id: "0x10a387cd1641775244cbc2ae2b48710dc80e4fab"
+            }
+        })
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
             })
     }
 
