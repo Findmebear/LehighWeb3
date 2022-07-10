@@ -1,23 +1,27 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
 import "./profile.css";
 
-function Profile(){
+function Profile() {
     const [person, setPerson] = useState("");
 
     const getInfo = () => {
         fetch('http://localhost:3000/users/0x10a387cd1641775244cbc2ae2b48710dc80e4fab')
-        .then((response) => response.json())
-        .then((data) => {
-            setPerson(data.first_name + "..." + data.last_name);
-
-        });
+            .then((response) => response.json())
+            .then((data) => {
+                setPerson(data.first_name + " " + data.last_name +
+                "\n" + data.description + " " + data.user_id);
+            });
 
     };
-    return(
-        <div>
-            <button onClick={getInfo}>GetPersonInfo</button>
-            {person}
+    return (
+        <div class="card">
+
+            <button onClick={getInfo}>User Information</button>
+            <div class="title">
+                {person}
+            </div>
+
         </div>
     );
 }
