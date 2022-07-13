@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar"
 import Post from "./components/Post/Post";
 import Profile from "./components/Profile/Profile.jsx";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PostProf from "./components/Profile/PostProfile";
 //import Profile from './components/Profile';
 
 
@@ -16,6 +17,7 @@ const App = () => {
       <Routes>
         <Route path="/post" element={<Post />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/postProfile" element={<PostProf />}/>
       </Routes>
       {/* <Post/> */}
     </div>
