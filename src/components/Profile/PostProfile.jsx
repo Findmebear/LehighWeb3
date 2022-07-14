@@ -1,37 +1,51 @@
 import axios from 'axios';
 import React, { useState, useContext } from 'react';
+import { TransactionContext } from "../../context/TransactionContext";
 
+const url = 'http://localhost:3000/user';
 
-class PostProfile extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {value: ''};
-  
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-  
-    handleChange(event) {
-      this.setState({value: event.target.value});
-    }
-  
-    handleSubmit(event) {
-      alert('A name was submitted: ' + this.state.value);
-      event.preventDefault();
-    }
-  
-    render() {
-      return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-      );
-    }
-  }
+const PostProfile = () => {
+    const [firstName, setName] = useState('');
+    const [email, setEmail] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(firstName, email);
+    };
+
+    return (
+        <section>
+            <h2 className='text-center'>post request</h2>
+            <form className='form' onSubmit={handleSubmit}>
+                <div className='form-row'>
+                    <label htmlFor='name' className='form-label'>
+                        name
+                    </label>
+                    <input
+                        type='text'
+                        className='form-input'
+                        id='name'
+                        value={firstName}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
+                <div className='form-row'>
+                    <label htmlFor='email' className='form-label'>
+                        email
+                    </label>
+                    <input
+                        type='email'
+                        className='form-input'
+                        id='email'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <button type='submit' className='btn btn-block'>
+                    login
+                </button>
+            </form>
+        </section>
+    );
+};
 export default PostProfile;
-
-//https://www.youtube.com/watch?v=xjWwnqMn-b0
