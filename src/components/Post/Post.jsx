@@ -20,10 +20,32 @@ const Post = () => {
     return (
         <div>
             <h1> Create a post! {postCount}</h1>
-            <Input placeholder="enter video" name= "video" type ="file" accept=".mp4, .mov, .mkv .ogg .wmv" handleChange= {()=> {}} />
-            <Input placeholder="Enter title" name="title" type="text" handleChange={handleChange} />
-            <Input placeholder="Enter text" name="text" type="text" handleChange={handleChange} />
-
+            <div class="row">
+              <div class= "col-25">
+              <label for="lFile">Video: </label>
+              </div>
+              <div class = "col-75">
+              <Input placeholder="enter video" name= "video" type ="file" accept=".mp4, .mov, .mkv .ogg .wmv" handleChange= {()=> {}} />
+                </div>
+            </div>
+            <div class="row">
+              <div class= "col-25">
+              <label for="lTitle">Title: </label>
+              
+              </div>
+              <div class = "col-75">
+              <Input placeholder="Enter title" name="title" type="text" handleChange={handleChange} />
+              </div>
+            </div>
+            <div class="row">
+              <div class= "col-25">
+              <label for="lText">Text: </label>
+              </div>
+              <div class = "col-75">
+              <Input placeholder="Enter text" name="text" type="text" style="height:200px" handleChange={handleChange} />
+                </div>
+            </div>
+          
             <button onClick={createPost}>Submit</button>
         </div>
     )
