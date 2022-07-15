@@ -22,7 +22,7 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 const Post = () => {
     const { createPost, postCount, handleChange, formData} = useContext(TransactionContext);
 
-    const storage = new Web3Storage({ token: process.env.WEB3_STORAGE_API })
+    const storage = new Web3Storage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDBGODhDQzg1QkNkYTAzNjAwOEEzYzgwM2FFNjVFMmFmZTczYjE4NTAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTc4NDgzNjgzODAsIm5hbWUiOiJMZWhpZ2ggV2ViMyBQcm9qZWN0In0.-RIC2qhGDUsikakDIMV3p3GDr_tH_6NJWtKRbP9Mqlw" })
 
     const handleSubmit = async (e) => {
       console.log(__filename + "/../..") 
@@ -33,18 +33,39 @@ const Post = () => {
       console.log(`stored file with cid: ${videoHash}`)
       if (!videoHash || !text || !title) return;
       console.log("Text: " + text + "\nTitle: " + title)
-      await createPost(videoHash);
+      await createPost();
     };
 
     return (
-        <div>
-            <h1> Create a post! {postCount}</h1>
-            <input type ="file" accept=".mp4, .mov, .mkv .ogg .wmv" />
-            <Input placeholder="Enter title" name="title" type="text" handleChange={handleChange} />
-            <Input placeholder="Enter text" name="text" type="text" handleChange={handleChange} />
-
-            <button onClick={handleSubmit}>Submit</button>
+      <div>
+        <h1> Create a post! {postCount}</h1>
+        <div class="row">
+          <div class= "col-25">
+          <label for="lFile">Video: </label>
+          </div>
+          <div class = "col-75">
+          <input type ="file" accept=".mp4, .mov, .mkv .ogg .wmv" />
+            </div>
         </div>
+        <div class="row">
+          <div class= "col-25">
+          <label for="lTitle">Title: </label>
+          
+          </div>
+          <div class = "col-75">
+          <Input placeholder="Enter title" name="title" type="text" handleChange={handleChange} />
+          </div>
+        </div>
+        <div class="row">
+          <div class= "col-25">
+          <label for="lText">Text: </label>
+          </div>
+          <div class = "col-75">
+          <Input placeholder="Enter text" name="text" type="text" style="height:200px" handleChange={handleChange} />
+            </div>
+        </div>
+        <button onClick={handleSubmit}>Submit</button>
+      </div>
     )
 };
 export default Post;
