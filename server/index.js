@@ -3,6 +3,9 @@ import cors from 'cors';
 import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url);
+const fs = require('fs');
+const pinataSDK = require('@pinata/sdk');
+
 
 const { Pool } = require('pg') //postgreSQL Pool library
 require('dotenv').config()
@@ -15,15 +18,79 @@ const pool = new Pool({
     ssl: { rejectUnauthorized: false }
 });
 
-// const fileUpload = require('express-fileupload');
 const port = process.env.PORT || 3000;
 const app = express();
+const multer = require("multer");
+const path = require("path");
+const pinata = pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_SECRET_API_KEY);
 
+const readableStreamForFile = fs.createReadStream('./upload/images/profile_1657996753204.jpeg');
 
+const options = {
+    pinataMetadata: {
+        name: "Profile_Image",
+        keyvalues: {
+            customKey: 'customValue',
+            customKey2: 'customValue2'
+        }
+    },
+    pinataOptions: {
+        cidVersion: 0
+    }
+};
+
+var ipfs_hash = [];
+pinata.pinFileToIPFS(readableStreamForFile, options).then((result) => {
+    //handle results here
+    ipfs_hash = result["IpfsHash"];
+    console.log(ipfs_hash);
+}).catch((err) => {
+    //handle error here
+    console.log(err);
+});
+
+// storage engine 
+const storage = multer.diskStorage({
+    destination: './upload/images',
+    filename: (req, file, cb) => {
+        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+    }
+})
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1000000
+    }
+})
+
+app.use('/profile', express.static('upload/images'));
+
+app.post("/:user_id/upload", upload.single('profile'), async (req, res) => {
+    const { user_id } = req.params;
+    const upload_image = await pool.query(
+        'INSERT INTO a_user_image (image_hash, user_id) VALUES ($1, $2) RETURNING *', 
+        [ipfs_hash, user_id]
+    );
+    res.json({
+        success: 1,
+        profile_url: `http://localhost:3000/profile/${req.file.filename}`
+    })
+})
+
+function errHandler(err, req, res, next) {
+    if (err instanceof multer.MulterError) {
+        res.json({
+            success: 0,
+            message: err.message
+        })
+    }
+}
+
+app.use(errHandler);
 app.use(express.urlencoded({extended: true}));
 app.use(express.json()) // To parse the incoming requests with JSON payloads
 app.use(cors());
-// app.use(fileUpload());
 
 //ROUTES//
 
@@ -69,35 +136,6 @@ app.post('/user', async (request, response) =>{
     }
 })
 
-// //upload an image
-// app.post('/post', async (request, response) =>{
-//     const {name, data} = request.files.pic;
-//     if (name && data) {
-//         await pool.query(
-//             'INSERT INTO a_user_image (image_id, img, name) VALUES ($1, $2 , $3) RETURNING *',
-//             [image_id, data, name]
-//         );
-//         res.sendStatus(200);
-//     } else {
-//         res.sendStatus(400);
-//     }
-// })
-
-// //get an image
-// app.get('/img/:image_id', async (request, response) =>{
-//     try {
-//         const { image_id } = request.params;
-//         const user = await pool.query(
-//             'SELECT * FROM a_user_image WHERE image_id = $1', 
-//             [image_id]
-//         );
-//         response.json(user.rows[0]);
-//     } catch (err) {
-//         console.error(err.message);
-//     }
-// })
-
-
 //update all the user's information, including first_name, last_name, and description.
 app.put('/user/id', async (request, response) =>{
     try {
@@ -127,7 +165,9 @@ app.put('/user/id', async (request, response) =>{
         const updateDescription = await pool.query(
             'UPDATE a_user SET description = $1 WHERE user_id = $2', 
             [description, user_id]
-        );     
+        );    
+        const updateUser = await pool.query('UPDATE a_user SET first_name = $1, last_name = $2, description = $3 where user_id = $4', 
+        [first_name, last_name, description, user_id]);
         response.json("Successfully updated all the information!");       
         
         
@@ -149,6 +189,7 @@ app.delete('/users/id', async (request, response) =>{
         response.json("User not exists!");
     }
 })
+
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
