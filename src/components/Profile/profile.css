@@ -1,10 +1,16 @@
 body{
-    margin-top: 0px;
+    margin-top: 20px;
     background-color: rgb(255, 255, 255);
 }
 
 .border-0{
     border: 0!important;
+}
+.title{
+    color:rgb(0, 0, 0);
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 /* FOR USER CARD */
 .card{
@@ -20,6 +26,9 @@ body{
 }
 .card-style1{
     box-shadow: 0px 0px 10px 0px rgb(89, 75, 128 / 9%);
+}
+.editProfile{
+    text-align: right;
 }
 section{
     padding: 120px 0;
