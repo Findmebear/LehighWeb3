@@ -24,8 +24,7 @@ const Post = () => {
 
     const storage = new Web3Storage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDBGODhDQzg1QkNkYTAzNjAwOEEzYzgwM2FFNjVFMmFmZTczYjE4NTAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTc4NDgzNjgzODAsIm5hbWUiOiJMZWhpZ2ggV2ViMyBQcm9qZWN0In0.-RIC2qhGDUsikakDIMV3p3GDr_tH_6NJWtKRbP9Mqlw" })
 
-    const handleSubmit = async (e) => {
-      console.log(__filename + "/../..") 
+    const handleSubmit = async (e) => { 
       const fileInput = document.querySelector('input[type="file"]')
       const {text, title} = formData;
       e.preventDefault();
@@ -33,7 +32,7 @@ const Post = () => {
       console.log(`stored file with cid: ${videoHash}`)
       if (!videoHash || !text || !title) return;
       console.log("Text: " + text + "\nTitle: " + title)
-      await createPost();
+      await createPost(videoHash);
     };
 
     return (
