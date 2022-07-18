@@ -4,24 +4,24 @@ import { TransactionContext } from "../../context/TransactionContext";
 
 
 const PostProfile = () => {
-    const [firstName, setName] = useState('');
-    const [lastName, setLast] = useState('');
-    const [ userId, setUser ] = useState('');
+    const [firstname, setName] = useState('');
+    const [lastname, setLast] = useState('');
+    const [userid, setUser] = useState('');
     const [descrip, setDescrip] = useState('');
 
     function onCreatePost(e) {
         e.preventDefault();
         const postData = {
-            userId,
-            firstName,
-            lastName,
-            descrip,
+            user_id: userid,
+            first_name: firstname,
+            last_name: lastname,
+            description: descrip,
         };
 
         axios
             .post(
                 'http://localhost:3000/user',
-                postData,
+                postData
             )
             .then((response) => {
                 console.log(response);
@@ -36,7 +36,7 @@ const PostProfile = () => {
                     <label className='block'>User ID: </label>
                     <input
                         type='text'
-                        value={userId}
+                        value={userid}
                         onChange={(e) => setUser(e.target.value)}
                         className='border border-gray-400 w-1/2 p-1'
                         placeholder='Please enter in your user id'
@@ -45,7 +45,7 @@ const PostProfile = () => {
                 <div className='mb-3'>
                     <label className='block'>First Name: </label>
                     <textarea
-                        value={firstName}
+                        value={firstname}
                         onChange={(e) => setName(e.target.value)}
                         className='border border-gray-400 w-1/2 p-1'
                         placeholder='Please enter in your first name'
@@ -55,7 +55,7 @@ const PostProfile = () => {
                 <div className='mb-3'>
                     <label className='block'>Last Name </label>
                     <textarea
-                        value={lastName}
+                        value={lastname}
                         onChange={(e) => setLast(e.target.value)}
                         className='border border-gray-400 w-1/2 p-1'
                         placeholder='Please enter in your last name'
@@ -83,11 +83,12 @@ const PostProfile = () => {
             </form>
         </div>
     );
-
-};
-export default PostProfile;
+    };
+    export default PostProfile;
 
 
 //https://stackoverflow.com/questions/69242963/how-to-make-an-axios-post-to-database
 //https://www.youtube.com/watch?v=hdzDoRuq4C0
 //https://www.youtube.com/watch?v=hdzDoRuq4C0
+//https://github.com/john-smilga/axios-tutorial-react/blob/main/src/examples/3-post-request.
+//https://stackoverflow.com/questions/69242963/how-to-make-an-axios-post-to-database
