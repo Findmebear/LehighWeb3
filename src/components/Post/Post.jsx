@@ -4,10 +4,6 @@ import { TransactionContext } from "../../context/TransactionContext";
 import "./post.css";
 import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
 
-require('dotenv').config()
-
-console.log(process.env.PRIVATE_KEY)
-
 const Input = ({ placeholder, name, type, value, handleChange }) => (
     <input
       placeholder={placeholder}
