@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
-//import { Provider } from 'react-redux'
-import { Provider } from "@ethersproject/abstract-provider";
 import { contractABI, contractAddress } from '../utils/constants';
 
 export const TransactionContext = React.createContext();
@@ -18,20 +16,20 @@ const getEthereumContract = () => {
 
 export const TransactionsProvider = ({ children }) => {
 
-    
-
     const [currentAccount, setCurrentAccount] = useState("");
     const [postCount, setPostCount] = useState(localStorage.getItem("createPostCount"));
     const [formData, setformData] = useState({videoHash: "", text: "", title: ""})
-    // const [currentBalance, balanceInEth] = useState("");
+    const [selectedFile, setSelectedFile] = useState(null);
 
 
     const handleChange = (e, name) => {
         console.log('running', e.target.value);
         setformData((prevState) => ({ ...prevState, [name]: e.target.value }));
-      };
+    };
 
-
+    const handleFileChange = (e, name) => {
+        setSelectedFile((prevState) => ({ ...prevState, [name]: e.target.files[0]}));
+    };
 
     const getBalance = async (address) => {
         // const network = 'rinkeby'; // use rinkeby testnet
@@ -88,18 +86,20 @@ export const TransactionsProvider = ({ children }) => {
         }
     }
 
-    const createPost = async() => {
+    const createPost = async(videoHash) => {
         try{
             const {ethereum} = window;
 
             if(ethereum){    
+                const {text, title} = formData;
+
                 const createPostContract = getEthereumContract();
 
-                const createPostHash = await createPostContract.createPost("Hash Test", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos tenetur recusandae culpa, impedit, commodi natus facere molestias harum facilis...", "Title Test");
+                const createPostHash = await createPostContract.createPost(videoHash, text, title);
 
-                console.log("Loading - ${createPostHash.hash}");
+                console.log(`Loading - ${createPostHash.hash}`);
                 await createPostHash.wait();
-                console.log("Success - ${createPostHash.hash}");
+                console.log(`Success - ${createPostHash.hash}`);
         
                 const postCount = await createPostContract.getPostCount();
         
@@ -119,7 +119,7 @@ export const TransactionsProvider = ({ children }) => {
     }, [])
 
     return (
-        <TransactionContext.Provider value={{ connectWallet, currentAccount, createPost, postCount, handleChange, formData }} >
+        <TransactionContext.Provider value={{ connectWallet, currentAccount, createPost, postCount, handleChange, handleFileChange, formData, selectedFile}} >
             {children}
         </TransactionContext.Provider>
     );

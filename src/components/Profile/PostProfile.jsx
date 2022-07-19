@@ -2,53 +2,93 @@ import axios from 'axios';
 import React, { useState, useContext } from 'react';
 import { TransactionContext } from "../../context/TransactionContext";
 
-const url = 'http://localhost:3000/user';
 
 const PostProfile = () => {
-    const [firstName, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const [firstname, setName] = useState('');
+    const [lastname, setLast] = useState('');
+    const [userid, setUser] = useState('');
+    const [descrip, setDescrip] = useState('');
 
-    const handleSubmit = async (e) => {
+    function onCreatePost(e) {
         e.preventDefault();
-        console.log(firstName, email);
-    };
+        const postData = {
+            user_id: userid,
+            first_name: firstname,
+            last_name: lastname,
+            description: descrip,
+        };
+
+        axios
+            .post(
+                'http://localhost:3000/user',
+                postData
+            )
+            .then((response) => {
+                console.log(response);
+            });
+    }
 
     return (
-        <section>
-            <h2 className='text-center'>post request</h2>
-            <form className='form' onSubmit={handleSubmit}>
-                <div className='form-row'>
-                    <label htmlFor='name' className='form-label'>
-                        name
-                    </label>
+        <div>
+            <h1 className='font-bold text-2xl'>Create Post</h1>
+            <form onSubmit={onCreatePost}>
+                <div className='mb-3'>
+                    <label className='block'>User ID: </label>
                     <input
                         type='text'
-                        className='form-input'
-                        id='name'
-                        value={firstName}
+                        value={userid}
+                        onChange={(e) => setUser(e.target.value)}
+                        className='border border-gray-400 w-1/2 p-1'
+                        placeholder='Please enter in your user id'
+                    />
+                </div>
+                <div className='mb-3'>
+                    <label className='block'>First Name: </label>
+                    <textarea
+                        value={firstname}
                         onChange={(e) => setName(e.target.value)}
-                    />
+                        className='border border-gray-400 w-1/2 p-1'
+                        placeholder='Please enter in your first name'
+                    ></textarea>
                 </div>
-                <div className='form-row'>
-                    <label htmlFor='email' className='form-label'>
-                        email
-                    </label>
-                    <input
-                        type='email'
-                        className='form-input'
-                        id='email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
+
+                <div className='mb-3'>
+                    <label className='block'>Last Name </label>
+                    <textarea
+                        value={lastname}
+                        onChange={(e) => setLast(e.target.value)}
+                        className='border border-gray-400 w-1/2 p-1'
+                        placeholder='Please enter in your last name'
+                    ></textarea>
                 </div>
-                <button type='submit' className='btn btn-block'>
-                    login
-                </button>
+
+                <div className='mb-3'>
+                    <label className='block'>Description</label>
+                    <textarea
+                        value={descrip}
+                        onChange={(e) => setDescrip(e.target.value)}
+                        className='border border-gray-400 w-1/2 p-1'
+                        placeholder='Please enter in a description'
+                    ></textarea>
+                </div>
+
+                <div className='mb-3'>
+                    <button
+                        type='submit'
+                        className='bg-purple-500 text-white px-3 py-1'
+                    >
+                        Create Post
+                    </button>
+                </div>
             </form>
-        </section>
+        </div>
     );
-};
-export default PostProfile;
+    };
+    export default PostProfile;
 
 
+//https://stackoverflow.com/questions/69242963/how-to-make-an-axios-post-to-database
+//https://www.youtube.com/watch?v=hdzDoRuq4C0
+//https://www.youtube.com/watch?v=hdzDoRuq4C0
+//https://github.com/john-smilga/axios-tutorial-react/blob/main/src/examples/3-post-request.
 //https://stackoverflow.com/questions/69242963/how-to-make-an-axios-post-to-database
