@@ -24,6 +24,7 @@ const Profile = () => {
     useEffect(() =>{
        fetchFirstName()
     },[]);
+    
     const fetchLastName = () => {
         fetch("http://localhost:3000/users/?id=${id}")
         .then(response => {
