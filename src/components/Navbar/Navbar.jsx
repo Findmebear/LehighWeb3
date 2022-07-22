@@ -18,7 +18,7 @@ const Navbar = () => {
       <button onClick={() => navigate("/profile")}>Profile</button>
       <button onClick={() => navigate("/post")}>Post</button>
       <button onClick={() => navigate("/postProfile")}>PostProfile</button>
-      <button onClick={() => navigate("/updatePic")}>UpdatePic</button>
+      <button onClick={() => navigate("/UploadPic")}>UploadPic</button>
       <button onClick={() => navigate("/updateProfile")}>UpdateProfile</button>
 
 
