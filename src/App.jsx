@@ -7,6 +7,8 @@ import Profile from "./components/Profile/Profile.jsx";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PostProf from "./components/Profile/PostProfile";
 import UpdateProf from "./components/Profile/UpdateProfile";
+import UpdateProfile from "./components/Profile/UpdateProf";
+
 
 
 const App = () => {
@@ -18,7 +20,8 @@ const App = () => {
         <Route path="/post" element={<Post />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/postProfile" element={<PostProf />}/>
-        <Route path="/updateProfile" element={<UpdateProf />}/>
+        <Route path="/updatePic" element={<UpdateProf />}/>
+        <Route path="/updateProfile" element={<UpdateProfile />}/>
       </Routes>
       {/* <Post/> */}
     </div>
