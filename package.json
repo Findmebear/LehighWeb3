@@ -29,6 +29,7 @@
     "redux-thunk": "^2.4.1",
     "swiper": "^8.1.5",
     "web-vitals": "^2.1.4",
+    "web3": "^1.7.4",
     "web3.storage": "^4.3.0"
   },
   "scripts": {

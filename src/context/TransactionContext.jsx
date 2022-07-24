@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import { contractABI, contractAddress } from '../utils/constants';
+import web3 from 'web3';
 
 export const TransactionContext = React.createContext();
 
@@ -52,8 +53,7 @@ export const TransactionsProvider = ({ children }) => {
 
             const accounts = await ethereum.request({ method: "eth_requestAccounts" });
             console.log("Connected", accounts[0]);
-
-            setCurrentAccount(accounts[0]);
+            setCurrentAccount(accounts[0])
         } catch (error) {
             console.log(error)
         }

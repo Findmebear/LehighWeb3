@@ -7,47 +7,26 @@ import defaultPic from "../Profile/defaultPic.jpeg";
 const Profile = () => {
 
     //State
-    const { currentAccount, connectWallet } = useContext(TransactionContext);
+    const { currentAccount } = useContext(TransactionContext);
     const [first_name, setFirstName] = useState([])
     const [last_name, setLastName] = useState([])
     const [description, setDescription] = useState([])
-    const id = currentAccount;
-    const fetchFirstName = () => {
-        fetch("http://localhost:3000/users/?id=${id}")
+    const id = "0xc9220c6683389fa251832853270f9f2436464707"
+    console.log("currentAccount - " + currentAccount);
+    console.log("id - " + id);
+    const fetchData = () => {
+        fetch("http://localhost:3000/users/" + id)
             .then(response => {
                 return response.json()
             })
             .then(data => {
-                setFirstName(data[5].first_name)
+                setFirstName(data.first_name)
+                setLastName(data.last_name)
+                setDescription(data.description)
             })
     }
     useEffect(() => {
-        fetchFirstName()
-    }, []);
-
-    const fetchLastName = () => {
-        fetch("http://localhost:3000/users/?id=${id}")
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                setLastName(data[5].last_name)
-            })
-    }
-    useEffect(() => {
-        fetchLastName()
-    }, []);
-    const fetchDescription = () => {
-        fetch("http://localhost:3000/users/?id=${id}")
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                setDescription(data[5].description)
-            })
-    }
-    useEffect(() => {
-        fetchDescription()
+        fetchData()
     }, []);
     return (
         <section className='bg-light'>
