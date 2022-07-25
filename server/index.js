@@ -24,7 +24,7 @@ const multer = require("multer");
 const path = require("path");
 const pinata = pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_SECRET_API_KEY);
 
-const readableStreamForFile = fs.createReadStream('./upload/images/profile_1657996753204.jpeg');
+// const readableStreamForFile = fs.createReadStream('./upload/images/profile_1657996753204.jpeg');
 
 const options = {
     pinataMetadata: {
@@ -39,15 +39,16 @@ const options = {
     }
 };
 
-var ipfs_hash = [];
-pinata.pinFileToIPFS(readableStreamForFile, options).then((result) => {
-    //handle results here
-    ipfs_hash = result["IpfsHash"];
-    console.log(ipfs_hash);
-}).catch((err) => {
-    //handle error here
-    console.log(err);
-});
+// var ipfs_hash = [];
+// pinata.pinFileToIPFS(readableStreamForFile, options).then((result) => {
+//     //handle results here
+//     ipfs_hash = result["IpfsHash"];
+//     console.log(ipfs_hash);
+// }).catch((err) => {
+//     //handle error here
+//     console.log(err);
+// });
+
 
 // storage engine 
 const storage = multer.diskStorage({
@@ -66,12 +67,12 @@ const upload = multer({
 
 app.use('/profile', express.static('upload/images'));
 
-app.post("/:user_id/upload", upload.single('profile'), async (req, res) => {
+app.post("/upload", upload.single('profile'), async (req, res) => {
     const { user_id } = req.params;
-    const upload_image = await pool.query(
-        'INSERT INTO a_user_image (image_hash, user_id) VALUES ($1, $2) RETURNING *', 
-        [ipfs_hash, user_id]
-    );
+    // const upload_image = await pool.query(
+    //     'INSERT INTO a_user_image (image_hash, user_id) VALUES ($1, $2) RETURNING *', 
+    //     [ipfs_hash, user_id]
+    // );
     res.json({
         success: 1,
         profile_url: `http://localhost:3000/profile/${req.file.filename}`

@@ -17,6 +17,7 @@ const App = () => {
     <div>
       <Navbar />
       <Routes>
+      <Route path = "/profile/uploadPicture" element={<ProfilePic/>} />
         <Route path="/post" element={<Post />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/postProfile" element={<PostProf />}/>
@@ -25,7 +26,6 @@ const App = () => {
       </Routes>
       {/* <Post/> */}
     </div>
-
   )
 }
 

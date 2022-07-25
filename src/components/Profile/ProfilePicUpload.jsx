@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useContext } from 'react';
+import { Form } from 'react-router-dom';
 import { TransactionContext } from "../../context/TransactionContext";
 import "./profile.css";
 
@@ -8,32 +9,52 @@ import "./profile.css";
 const PostProfile = () => {
     const handleSubmit = async (e) => { 
         const fileInput = document.querySelector('input[type="file"]')
-        var FormData = require('form-data')
-        var imageData = new FormData();
-        imageData.append("file", fileInput[0])
-        console.log(fileInput.files);
-        const url = "https://api.pinata.cloud/pinning/pinFileToIPFS";
-        try {
-            const resFile = await axios.post(url, imageData,
-            {
-                headers: {
-                    'pinata_api_key': `a3e45709eba1fe13a614`,
-                    'pinata_secret_api_key': `bcbae387c4a66237a5492e22101c13493fe37f75d1ccf3bd780e4f22dda9b189`,
-                    "Content-Type": `multipart/form-data`
-                }
-            }
-            );
-            console.log(`The Hash of the Image: ${resFile.data.IpfsHash}`);
-            const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
+        // var FormData = require('form-data')
+        // var imageData = new FormData();
+        // imageData.append("file", fileInput[0])
+        console.log(fileInput.files)
+        const reader = new FileReader()
+        reader.onload = function () {
+          const img = new Image()
+          img.onload = function () {
+            const canvas = document.createElement('canvas')
 
-            const postToUserTable = await axios.post() //post the hash of the newly uploaded image to the image table
-            
-    
-    
-        } catch (error) {
-            console.log("File to IPFS: ")
-            console.log(error)
+            const context = canvas.getContext('2d')
+            context.drawImage(img,0,0)
+
+            const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+            const data = imageData.data
+            for (var i = 0; i <= data.length; i += 4){
+              const avg = (data[i] + data[i+1] + data[i+2]) / 3
+              data[i] = avg
+              data[i + 1] = avg
+              data[i + 2] = avg
+            }
+            context.putImageData(imageData, 0, 0)
+            document.body.appendChild(img)
+
+            canvas.toBlob(function (blob){
+              const form = new FormData()
+              form.append('image', blob, fileInput[0])
+              const xhr = new XMLHttpRequest()
+              xhr.open('GET', url)
+              xhr.responseType = "arraybuffer"
+              var result
+              xhr.onload = function() {
+                // result = ArrayBuffer
+                result = new Uint8Array(xhr.response)
+                if (xhr.status === 200) 
+                  console.log(result);
+              };
+               xhr.send();
+              //  xhr.open('POST', '/upload', true)
+              //  xhr.send(result)
+            })
+          }
+          img.src = reader.result
         }
+        var url = reader.readAsDataURL(fileInput.files[0])
+        
     }
     return (
         <div>
