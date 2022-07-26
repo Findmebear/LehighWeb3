@@ -30,6 +30,9 @@ body{
 .editProfile{
     text-align: right;
 }
+.popup-header{
+    text-align: center;
+}
 section{
     padding: 120px 0;
     overflow: hidden;
