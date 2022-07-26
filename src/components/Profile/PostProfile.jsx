@@ -6,13 +6,13 @@ import { TransactionContext } from "../../context/TransactionContext";
 const PostProfile = () => {
     const [firstname, setName] = useState('');
     const [lastname, setLast] = useState('');
-    const [userid, setUser] = useState('');
     const [descrip, setDescrip] = useState('');
+    const { currentAccount, setUser } = useContext(TransactionContext);
 
     function onCreatePost(e) {
         e.preventDefault();
         const postData = {
-            user_id: userid,
+            user_id: currentAccount,
             first_name: firstname,
             last_name: lastname,
             description: descrip,
@@ -36,7 +36,7 @@ const PostProfile = () => {
                     <label className='block'>User ID: </label>
                     <input
                         type='text'
-                        value={userid}
+                        value={currentAccount}
                         onChange={(e) => setUser(e.target.value)}
                         className='border border-gray-400 w-1/2 p-1'
                         placeholder='Please enter in your user id'
