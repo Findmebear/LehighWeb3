@@ -4,18 +4,20 @@ import { TransactionContext } from "../../context/TransactionContext";
 import "./profile.css";
 import defaultPic from "../Profile/defaultPic.jpeg";
 
-const Profile = () => {
 
-    //State
+const Profile = () => {
     const { currentAccount } = useContext(TransactionContext);
     const [first_name, setFirstName] = useState([])
     const [last_name, setLastName] = useState([])
     const [description, setDescription] = useState([])
-    const id = "0xc9220c6683389fa251832853270f9f2436464707"
-    console.log("currentAccount - " + currentAccount);
-    console.log("id - " + id);
-    const fetchData = () => {
-        fetch("http://localhost:3000/users/" + id)
+
+    // //State
+    const id = currentAccount;
+    // console.log("currentAccount - " + currentAccount);
+    // console.log("id - " + id);
+    // console.log(`t:3000/users/${currentAccount}`)
+    const fetchData = async () => {
+        await fetch("http://localhost:3000/users/" + id)
             .then(response => {
                 return response.json()
             })
@@ -46,12 +48,9 @@ const Profile = () => {
                                         </a>
                                     </div>
                                     <div class='bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded'>
-                                        <h3 class='h2 text-white mb-0'> {first_name} {last_name} </h3>
-                                        <span class='text-primary'> @sampleUser</span>
-                                    </div>
+                                        <h3 class='h2 text-white mb-0'> {first_name} {last_name} </h3>                                    </div>
                                     <ul class='listed-unstyled mb-1-9'>
-                                        <li class='mb-2 mb-xl-3 display-28'><span class='display-26 text-primary me-2 font-weight-600'>Wallet Address: </span> sample address</li>
-                                        <li class='mb-2 mb-xl-3 display-28'><span class='display-26 text-primary me-2 font-weight-600'>Email: </span> sample email</li>
+                                        <li class='mb-2 mb-xl-3 display-28'><span class='display-26 text-primary me-2 font-weight-600'>Wallet Address</span> {id}</li>
                                     </ul>
                                     <div class='col-lg-6 px-xl-10'>
                                         <div>
