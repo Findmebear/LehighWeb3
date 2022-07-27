@@ -3,12 +3,18 @@ import React, { useState, useContext } from 'react';
 import { Form } from 'react-router-dom';
 import { TransactionContext } from "../../context/TransactionContext";
 
-
+// 1st function serialization of file struct "serialize"
+// 2nd function deserialization of file struct "deserialize"
 
 const UploadPic = () => {
     const handleSubmit = async (e) => { 
         const fileInput = document.querySelector('input[type="file"]')
         console.log(fileInput.files)
+        //var buffer = serialize(fileInput.files)
+        //console.log(buffer) // printing out the 64 uint
+        //File file = deserialize(buffer);
+        //console.log(file);
+        // line 12 and line 16 should print the same thing, that's how you know your functions work
         const reader = new FileReader()
         reader.onload = function () {
           const img = new Image()
@@ -24,9 +30,9 @@ const UploadPic = () => {
             context.putImageData(imageData, 0, 0)
             document.body.appendChild(img)
 
-            var base64String = canvas.toDataURL();
-            var myBase64Data = base64String.split(',')[1];
-            console.log(myBase64Data);
+            var base64String = canvas.toDataURL('image/jpeg');
+            // var myBase64Data = base64String.split(',')[1];
+            console.log(base64String);
           }
           img.src = reader.result
 
