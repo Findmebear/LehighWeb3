@@ -7,7 +7,7 @@ import Profile from "./components/Profile/Profile.jsx";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PostProf from "./components/Profile/PostProfile";
 import UploadPic from "./components/Post/UploadPic";
-import UpdateProfile from "./components/Profile/UpdateProf";
+// import UpdateProfile from "./components/Profile/UpdateProf";
 
 
 
@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/postProfile" element={<PostProf />}/>
         <Route path="/UploadPic" element={<UploadPic />}/>
-        <Route path="/updateProfile" element={<UpdateProfile />}/>
+        {/* <Route path="/updateProfile" element={<UpdateProfile />}/> */}
       </Routes>
       {/* <Post/> */}
     </div>
