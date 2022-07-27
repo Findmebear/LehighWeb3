@@ -10,8 +10,7 @@ const UpdateProf = () => {
     const { currentAccount, setUser } = useContext(TransactionContext);
     const id = currentAccount;
 
-    function Update(e) {
-        e.preventDefault();
+    function Update() {
         const postData = {
             user_id: currentAccount,
             first_name: firstname,
@@ -33,16 +32,6 @@ const UpdateProf = () => {
         <div>
             <h1 className='font-bold text-2xl'>Create Post</h1>
             <form onSubmit={Update}>
-                {/* <div className='mb-3'>
-                    <label className='block'>User ID: </label>
-                    <input
-                        type='text'
-                        value={id}
-                        onChange={(e) => setUser(e.target.value)}
-                        className='border border-gray-400 w-1/2 p-1'
-                        placeholder='Please enter in your user id'
-                    />
-                </div> */}
                 <div className='mb-3'>
                     <label className='block'>First Name: </label>
                     <textarea
@@ -106,8 +95,6 @@ const UpdateProf = () => {
     // return (
 
     // );
-
-
 };
 export default UpdateProf;
 
