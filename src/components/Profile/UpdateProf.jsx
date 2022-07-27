@@ -10,7 +10,7 @@ const UpdateProf = () => {
     const { currentAccount, setUser } = useContext(TransactionContext);
     const id = currentAccount;
 
-    function onCreatePost(e) {
+    function Update(e) {
         e.preventDefault();
         const postData = {
             user_id: currentAccount,
@@ -21,7 +21,7 @@ const UpdateProf = () => {
 
         Axios
             .put(
-                "http://localhost:3000/user/id" +currentAccount,
+                "http://localhost:3000/user/id",
                 postData
             )
             .then((response) => {
@@ -32,7 +32,7 @@ const UpdateProf = () => {
     return (
         <div>
             <h1 className='font-bold text-2xl'>Create Post</h1>
-            <form onSubmit={onCreatePost}>
+            <form onSubmit={Update}>
                 {/* <div className='mb-3'>
                     <label className='block'>User ID: </label>
                     <input
@@ -78,7 +78,7 @@ const UpdateProf = () => {
                         type='submit'
                         className='bg-purple-500 text-white px-3 py-1'
                     >
-                        Create Post
+                        Update Post
                     </button>
                 </div>
             </form>

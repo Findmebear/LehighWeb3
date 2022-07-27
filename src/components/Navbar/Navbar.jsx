@@ -19,7 +19,7 @@ const Navbar = () => {
       <button onClick={() => navigate("/post")}>Post</button>
       <button onClick={() => navigate("/postProfile")}>PostProfile</button>
       <button onClick={() => navigate("/UploadPic")}>UploadPic</button>
-      {/* <button onClick={() => navigate("/updateProfile")}>UpdateProfile</button> */}
+      <button onClick={() => navigate("/updateProfile")}>UpdateProfile</button>
 
 
       <div class="rightnav">
