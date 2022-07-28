@@ -48,7 +48,6 @@ const Profile = () => {
                     <div class='col-lg-12 mb-4 mb-sm05'>
                         <div class='card card-style1 border-0'>
                             <div class="row align-items-center">
-
                                 <div class='col-lg-5 mb-4 mb-lg-0'>
                                     {/*DISPLAYS USER IMAGE*/}
                                     <img src={defaultPic} alt='default' borderRadius='50%' ></img>

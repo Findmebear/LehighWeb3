@@ -1,7 +1,7 @@
 .leftnav button {
     width: max-content;
     display: inline-block;
-    background-color: var(--color-primary);
+    background-color: #CFAB7A;
     padding: 0.75rem 1.2rem;
     border: none;
     cursor: pointer;
@@ -9,11 +9,13 @@
 }
 
 .leftnav button:hover {
-    background: var(--color-white);
-    color: var(--color-bg);
+    background-color: #00703C;
+    color: #FFFFFF;
     border-color: transparent;
 }
 
 .rightnav {
     float : right;
+    background-color: #157123;
+
 }
