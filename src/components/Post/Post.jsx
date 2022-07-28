@@ -14,19 +14,9 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
       className="my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
     />
   );
-// const display all posts
-const displayAllPosts = async(e) => {
-  const {postCount} = useContext(TransactionContext);
-    for(let i = 0; i < postCount; i++){
-      console.log(postCount);
-    }
-    console.log("there is " + postCount + " posts");
-  //for loop to iterate through the array of posts stuct from smart contract
-  //console.log each instance (post)
-  //display total number
-}
+
 const Post = () => {
-    const { createPost, postCount, handleChange, formData} = useContext(TransactionContext);
+    const { createPost, getAllPosts, postCount, getPostCount, handleChange, formData} = useContext(TransactionContext);
 
     const storage = new Web3Storage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDBGODhDQzg1QkNkYTAzNjAwOEEzYzgwM2FFNjVFMmFmZTczYjE4NTAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTc4NDgzNjgzODAsIm5hbWUiOiJMZWhpZ2ggV2ViMyBQcm9qZWN0In0.-RIC2qhGDUsikakDIMV3p3GDr_tH_6NJWtKRbP9Mqlw" })
 
@@ -41,9 +31,19 @@ const Post = () => {
       await createPost(videoHash);
     };
 
+    const DisplayAllPosts = async(e) => {
+      //for loop to iterate through the array of Post struct from smart contract
+      // console.log each instance (post) 
+
+    }
+    useEffect(() => {
+      getPostCount()
+      const posts = getAllPosts();
+      console.log(posts)
+    }, [postCount]);
     return (
       <div>
-        <h1> Create a post! {postCount}</h1>
+        <h1> Create a post! Total number of Posts: {postCount}</h1>
         <div class="row">
           <div class= "col-25">
           <label for="lFile">Video: </label>

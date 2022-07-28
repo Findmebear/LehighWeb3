@@ -16,44 +16,31 @@ const getEthereumContract = () => {
 }
 
 export const TransactionsProvider = ({ children }) => {
-
     const [currentAccount, setCurrentAccount] = useState("");
-    const [postCount, setPostCount] = useState(localStorage.getItem("createPostCount"));
+    const [isLoading, setIsLoading] = useState(true);
+    const [postCount, setPostCount] = useState(0);
     const [formData, setformData] = useState({videoHash: "", text: "", title: ""})
-    const [selectedFile, setSelectedFile] = useState(null);
-
-
     const handleChange = (e, name) => {
         console.log('running', e.target.value);
         setformData((prevState) => ({ ...prevState, [name]: e.target.value }));
     };
-
-    const handleFileChange = (e, name) => {
-        setSelectedFile((prevState) => ({ ...prevState, [name]: e.target.files[0]}));
-    };
-
     const getBalance = async (address) => {
-        // const network = 'rinkeby'; // use rinkeby testnet
-        // const provider = ethers.getDefaultProvider(network);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-        //const balanceInEth = ethers.utils.formatEther(contractAddress);
         const balance = await provider.getBalance(address);
         const balanceInEth = ethers.utils.formatEther(balance, { pad: true });
         console.log("The balance is", balanceInEth);
     }
-
     const connectWallet = async () => {
         try {
             const { ethereum } = window;
-
             if (!ethereum) {
                 alert("Get MetaMask!");
                 return;
             }
-
             const accounts = await ethereum.request({ method: "eth_requestAccounts" });
             console.log("Connected", accounts[0]);
             setCurrentAccount(accounts[0])
+            setIsLoading(false);
         } catch (error) {
             console.log(error)
         }
@@ -64,7 +51,7 @@ export const TransactionsProvider = ({ children }) => {
             * First make sure we have access to window.ethereum
             */
             const { ethereum } = window;
-            setCurrentAccount("Sign In");
+            await setCurrentAccount("Sign In");
             if (!ethereum) {
                 console.log("Make sure you have metamask!");
             } else {
@@ -73,31 +60,15 @@ export const TransactionsProvider = ({ children }) => {
             const accounts = await ethereum.request({ method: "eth_accounts" });
 
             if (accounts.length !== 0) {
-                const account = accounts[0];
-                const bal = await getBalance(contractAddress);
+                const account = await accounts[0];
+                await setCurrentAccount(account)
                 console.log("Found an authorized account:", account);
-                //console.log("The balance of the account is", bal);
-                setCurrentAccount(account)
             } else {
                 console.log("No authorized account found")
             }
         } catch (error) {
             console.log(error);
         }
-    }
-    //Get all posts const get all posts = async => { }
-    const getAllPosts = async() => {
-        try{
-            const createPostContract = getEthereumContract();
-            createPostContract.getPostCount();
-            return;
-        }
-        catch(error){
-            console.log(error);
-        }
-    //try catch
-    //createPostContract.getallposts( from smart contract)
-    //return all posts
     }
 
     const createPost = async(videoHash) => {
@@ -125,16 +96,26 @@ export const TransactionsProvider = ({ children }) => {
         } catch (error){
             console.log(error);
         }
-
     }
 
-    useEffect(() => {
-        checkIfWalletIsConnected();
+    const getPostCount = async() => {
+        const createPostContract = getEthereumContract();
+        const postCount = await createPostContract.getPostCount();
+        setPostCount(postCount.toNumber());
+    }
+    
+    const getAllPosts = async() => {
+        const createPostContract = getEthereumContract();
+        const posts = await createPostContract.getAllPosts();
+        return posts;
+    }
+
+    useEffect(async() => {
+        await checkIfWalletIsConnected();
     }, [])
 
     return (
-        //add here getallposts
-        <TransactionContext.Provider value={{ connectWallet, currentAccount, createPost, postCount, handleChange, handleFileChange, formData, selectedFile}} >
+        <TransactionContext.Provider value={{ isLoading, connectWallet, currentAccount, createPost, getPostCount, postCount, getAllPosts, handleChange, formData}} >
             {children}
         </TransactionContext.Provider>
     );
