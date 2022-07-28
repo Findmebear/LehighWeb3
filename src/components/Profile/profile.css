@@ -1,6 +1,6 @@
 body{
     margin-top: 20px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(207, 171, 122);
 }
 .title{
     color:rgb(0, 0, 0);
@@ -37,7 +37,7 @@ img{
 }
 .edit_profile{
     border: none;
-    color: CFAB7A;
+    color: #CFAB7A;
     padding: 15px 32px;
     text-align: center;
     display: inline-block;
@@ -45,16 +45,17 @@ img{
     border-radius: 3px;
 }
 .btn-primary{
-    background-color: CFAB7A;
+    background-color: #CFAB7A;
     text-align: center;
 }
 .popup-header{
     text-align: center;
 }
+/* background color */
 section{
-    padding: 120px 0;
+    padding: 38px 0;
     overflow: hidden;
-    background: #fff;
+    background: #CFAB7A;
 }
 /* TEXT SETTINGS */
 .text-primary{
