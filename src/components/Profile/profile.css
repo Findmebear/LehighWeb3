@@ -53,9 +53,12 @@ img{
 }
 /* background color */
 section{
-    padding: 38px 0;
+    padding: 150px 0;
     overflow: hidden;
-    background: #CFAB7A;
+    background: white;
+}
+.section_body{
+    margin-top: 0px;
 }
 /* TEXT SETTINGS */
 .text-primary{

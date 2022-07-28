@@ -41,7 +41,7 @@ const Profile = () => {
     }, [currentAccount]);
 
     return (
-        <section className='body'>
+        <section className='section_body'>
             <div class = 'wrapper'>
                 <div class='container'>
                     {/* HEADER */}
