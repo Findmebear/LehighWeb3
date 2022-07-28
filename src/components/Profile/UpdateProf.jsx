@@ -73,28 +73,6 @@ const UpdateProf = () => {
             </form>
         </div>
     );
-    // const [firstname, setName] = useState('');
-    // const [lastname, setLast] = useState('');
-    // const [descrip, setDescrip] = useState('');
-    // const { currentAccount } = useContext(TransactionContext);
-    // function updatePost() {
-    //     Axios
-    //         .put('http://localhost:3000/user', {
-    //             user_id: currentAccount,
-    //             first_name: firstname,
-    //             last_name: lastname,
-    //             description: descrip,
-    //         })
-    //         .then((response) => {
-    //             setPost(response.data);
-    //         });
-    // }
-
-    // if (!post) return "No post!"
-
-    // return (
-
-    // );
 };
 export default UpdateProf;
 
