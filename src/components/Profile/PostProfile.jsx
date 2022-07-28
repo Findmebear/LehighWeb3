@@ -30,7 +30,7 @@ const PostProfile = () => {
 
     return (
         <div>
-            <h1 className='font-bold text-2xl'>Create Post</h1>
+            <h1 className='font-bold text-2xl'>Upload User Information</h1>
             <form onSubmit={onCreatePost}>
                 <div className='mb-3'>
                     <label className='block'>User ID: </label>

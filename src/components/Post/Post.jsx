@@ -38,8 +38,8 @@ const Post = () => {
     }
     useEffect(() => {
       getPostCount()
-      const posts = getAllPosts();
-      console.log(posts)
+      // const posts = getAllPosts();
+      // console.log(posts)
     }, [postCount]);
     return (
       <div>

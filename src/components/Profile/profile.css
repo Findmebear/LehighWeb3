@@ -17,7 +17,7 @@ body{
     text-align: center;
     width: 400px;
     padding: 20px;
-    background-color: #512a05;
+    background-color: #FFD24F;
 }
 .card__image{
     display: block;
@@ -55,10 +55,10 @@ img{
 section{
     padding: 150px 0;
     overflow: hidden;
-    background: white;
+    background: #512a05;
 }
 .section_body{
-    margin-top: 0px;
+    margin-top: 10px;
 }
 /* TEXT SETTINGS */
 .text-primary{
