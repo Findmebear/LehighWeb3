@@ -14,7 +14,17 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
       className="my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
     />
   );
-
+// const display all posts
+const displayAllPosts = async(e) => {
+  const {postCount} = useContext(TransactionContext);
+    for(let i = 0; i < postCount; i++){
+      console.log(postCount);
+    }
+    console.log("there is " + postCount + " posts");
+  //for loop to iterate through the array of posts stuct from smart contract
+  //console.log each instance (post)
+  //display total number
+}
 const Post = () => {
     const { createPost, postCount, handleChange, formData} = useContext(TransactionContext);
 

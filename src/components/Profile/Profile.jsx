@@ -42,46 +42,27 @@ const Profile = () => {
 
     return (
         <section className='bg-light'>
-            <div class='container'>
-                <div class='row'>
-                    <h1 class='title'>My Profile</h1>
-                    <div class='col-lg-12 mb-4 mb-sm05'>
-                        <div class='card card-style1 border-0'>
-                            <div class="row align-items-center">
-                                <div class='col-lg-5 mb-4 mb-lg-0'>
-                                    {/*DISPLAYS USER IMAGE*/}
-                                    <img src={defaultPic} alt='default' borderRadius='50%' ></img>
-                                </div>
-                                <div class='col-lg-6 px-xl-10'>
-                                    {/*EDIT PROFILE POP UP*/}
-                                    <div class='editProfile'>
-                                        <button onClick={togglePopup}>Edit Profile</button>
-                                        {isOpen && <Popup
-                                            content={<>
-                                                <h1 className='popup-header'>Edit your profile</h1>
-                                                <UpdateProf />
-                                            </>}
-                                            handleClose={togglePopup}
-                                        />}
-                                    </div>
-
-                                    {/*DISPLAY USER INFO*/}
-                                    <div class='bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded'>
-                                        <h3 class='h2 text-white mb-0'> {first_name} {last_name} </h3>
-                                    </div>
-                                    <ul class='listed-unstyled mb-1-9'>
-                                        <li class='mb-2 mb-xl-3 display-28'><span class='display-26 text-primary me-2 font-weight-600'>Wallet Address</span> {id}</li>
-                                    </ul>
-                                    <div class='col-lg-6 px-xl-10'>
-                                        <div>
-                                            <span class='section-title text-secondary mb-3 mb-sm-4'> About me:</span>
-                                            <p class='text-secondary'> {description}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            <div class = 'wrapper'>
+                <div class='container'>
+                    {/* HEADER */}
+                    <h1 class='title'> My Profile</h1>
+                    {/* USER CARD */}
+                    <div class='card'>
+                        <img class='card__image' src={defaultPic} alt="profilePic" />
+                        <h2 class='user_name'> {first_name} {last_name}</h2>
+                        <p class='user_bio'> {description}</p>
+                        <div class='edit_profile'>
+                            <button type='submit' class='btn btn-primary' onClick={togglePopup}>Edit Profile</button>
+                            {isOpen && <Popup
+                                content={<>
+                                    <h3 className='popup-header'>Edit your Profile</h3>
+                                    <UpdateProf />
+                                </>}
+                                handleClose={togglePopup}
+                            />}
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -89,7 +70,46 @@ const Profile = () => {
     )
 };
 export default Profile;
+                // <div class='row'>
+                //     <h1 class='title'>My Profile</h1>
+                //     <div class='col-lg-12 mb-4 mb-sm05'>
+                //         <div class='card card-style1 border-0'>
+                //             <div class="row align-items-center">
+                //                 <div class='col-lg-5 mb-4 mb-lg-0'>
+                //                     {/*DISPLAYS USER IMAGE*/}
+                //                     <img src={defaultPic} alt='default' borderRadius='50%' ></img>
+                //                 </div>
+                //                 <div class='col-lg-6 px-xl-10'>
+                //                     {/*EDIT PROFILE POP UP*/}
+                //                     <div class='editProfile'>
+                //                         <button onClick={togglePopup}>Edit Profile</button>
+                //                         {isOpen && <Popup
+                //                             content={<>
+                //                                 <h1 className='popup-header'>Edit your profile</h1>
+                //                                 <UpdateProf />
+                //                             </>}
+                //                             handleClose={togglePopup}
+                //                         />}
+                //                     </div>
 
+                //                     {/*DISPLAY USER INFO*/}
+                //                     <div class='bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded'>
+                //                         <h3 class='h2 text-white mb-0'> {first_name} {last_name} </h3>
+                //                     </div>
+                //                     <ul class='listed-unstyled mb-1-9'>
+                //                         <li class='mb-2 mb-xl-3 display-28'><span class='display-26 text-primary me-2 font-weight-600'>Wallet Address</span> {id}</li>
+                //                     </ul>
+                //                     <div class='col-lg-6 px-xl-10'>
+                //                         <div>
+                //                             <span class='section-title text-secondary mb-3 mb-sm-4'> About me:</span>
+                //                             <p class='text-secondary'> {description}</p>
+                //                         </div>
+                //                     </div>
+                //                 </div>
+                //             </div>
+                //         </div>
+                //     </div>
+                // </div>
 
 //https://jsonplaceholder.typicode.com/users
 //https://stackoverflow.com/questions/64312119/send-axios-api-requests-from-react-app-deployed-on-heroku

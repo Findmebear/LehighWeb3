@@ -85,6 +85,20 @@ export const TransactionsProvider = ({ children }) => {
             console.log(error);
         }
     }
+    //Get all posts const get all posts = async => { }
+    const getAllPosts = async() => {
+        try{
+            const createPostContract = getEthereumContract();
+            createPostContract.getPostCount();
+            return;
+        }
+        catch(error){
+            console.log(error);
+        }
+    //try catch
+    //createPostContract.getallposts( from smart contract)
+    //return all posts
+    }
 
     const createPost = async(videoHash) => {
         try{
@@ -119,6 +133,7 @@ export const TransactionsProvider = ({ children }) => {
     }, [])
 
     return (
+        //add here getallposts
         <TransactionContext.Provider value={{ connectWallet, currentAccount, createPost, postCount, handleChange, handleFileChange, formData, selectedFile}} >
             {children}
         </TransactionContext.Provider>

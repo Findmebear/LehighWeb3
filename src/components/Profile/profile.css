@@ -2,10 +2,6 @@ body{
     margin-top: 20px;
     background-color: rgb(255, 255, 255);
 }
-
-.border-0{
-    border: 0!important;
-}
 .title{
     color:rgb(0, 0, 0);
     text-align: center;
@@ -13,22 +9,44 @@ body{
     text-transform: uppercase;
 }
 /* FOR USER CARD */
+.wrapper{
+    display: grid;
+    place-items: center;
+}
 .card{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #c1b9b2;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0,.125);
-    border-radius: .25rem;
+    text-align: center;
+    width: 400px;
+    padding: 20px;
+    background-color: #512a05;
 }
-.card-style1{
-    box-shadow: 0px 0px 10px 0px rgb(89, 75, 128 / 9%);
+.card__image{
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+    
 }
-.editProfile{
-    text-align: right;
+.user_id{
+    font-size: 10px;
+}
+img{
+    width:100%;
+}
+.edit_profile{
+    border: none;
+    color: CFAB7A;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.btn-primary{
+    background-color: CFAB7A;
+    text-align: center;
 }
 .popup-header{
     text-align: center;
@@ -38,17 +56,6 @@ section{
     overflow: hidden;
     background: #fff;
 }
-.mb-2-3, .my-2-3{
-    margin-bottom: 2.3rem;
-}
-.section-title{
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    position: relative;
-    display: inline-block;
-}
 /* TEXT SETTINGS */
 .text-primary{
     color: rgb(255, 255, 255) !important;
@@ -56,37 +63,9 @@ section{
 .text-secondary{
     color: rgb(0, 0, 0) !important;
 }
-.font-weight-600{
-    font-weight: 600;
-}
-.display-26{
-    font-size: 1.3 rem;
-}
-.p-1-9 {
-    padding: 1.9rem;
-}
 
 .bg-secondary {
     background: #4db5ff !important;
-}
-.pe-1-9, .px-1-9 {
-    padding-right: 1.9rem;
-}
-.ps-1-9, .px-1-9 {
-    padding-left: 1.9rem;
-}
-.pb-1-9, .py-1-9 {
-    padding-bottom: 1.9rem;
-}
-.pt-1-9, .py-1-9 {
-    padding-top: 1.9rem;
-}
-.mb-1-9, .my-1-9 {
-    margin-bottom: 1.9rem;
-}
-
-.rounded {
-    border-radius: 0.25rem!important;
 }
 
 /* FOR DIFFERENT MEDIA SIZES */
@@ -111,43 +90,3 @@ section{
     }
 }
 
-
-/* .card {
-    max-width: 800px;
-    margin: auto;
-    text-align: center;
-}
-
-.title {
-    text-align: center;
-    color: rgb(97, 67, 6);
-    font-size: 30px;
-}
-button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-}
-
-a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-}
-.allignment{
-    display: block;
-    margin: auto;
-    text-align: center;
-}
-
-button:hover,
-a:hover {
-    opacity: 0.7;
-} */

@@ -30,7 +30,6 @@ const UpdateProf = () => {
 
     return (
         <div>
-            <h1 className='font-bold text-2xl'>Create Post</h1>
             <form onSubmit={Update}>
                 <div className='mb-3'>
                     <label className='block'>First Name: </label>
@@ -43,7 +42,7 @@ const UpdateProf = () => {
                 </div>
 
                 <div className='mb-3'>
-                    <label className='block'>Last Name </label>
+                    <label className='block'>Last Name: </label>
                     <textarea
                         value={lastname}
                         onChange={(e) => setLast(e.target.value)}
@@ -53,7 +52,7 @@ const UpdateProf = () => {
                 </div>
 
                 <div className='mb-3'>
-                    <label className='block'>Description</label>
+                    <label className='block'>Description:</label>
                     <textarea
                         value={descrip}
                         onChange={(e) => setDescrip(e.target.value)}
@@ -67,7 +66,7 @@ const UpdateProf = () => {
                         type='submit'
                         className='bg-purple-500 text-white px-3 py-1'
                     >
-                        Update Post
+                        Update Profile
                     </button>
                 </div>
             </form>
