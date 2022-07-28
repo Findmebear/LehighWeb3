@@ -55,10 +55,10 @@ img{
 section{
     padding: 150px 0;
     overflow: hidden;
-    background: white;
+    background: #CFAB7A;
 }
 .section_body{
-    margin-top: 0px;
+    margin-top: 10px;
 }
 /* TEXT SETTINGS */
 .text-primary{
