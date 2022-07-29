@@ -17,7 +17,7 @@ body{
     text-align: center;
     width: 400px;
     padding: 20px;
-    background-color: #FFD24F;
+    background-color: #CFAB7A;
 }
 .card__image{
     display: block;
@@ -55,7 +55,7 @@ img{
 section{
     padding: 150px 0;
     overflow: hidden;
-    background: #512a05;
+    background: #CFAB7A;
 }
 .section_body{
     margin-top: 10px;
